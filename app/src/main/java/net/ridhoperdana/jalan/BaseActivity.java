@@ -95,7 +95,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         {
             startActivity(new Intent(this, PengaturanActivity.class));
         }
-
+        if(id==R.id.tombolBeranda)
+        {
+            startActivity(new Intent(this, MainActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 }
