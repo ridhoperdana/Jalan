@@ -5,14 +5,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,8 +48,7 @@ public class MainActivity extends BaseActivity {
         }
         tombolDipilihkan.setOnClickListener(klik);
         tombolPilihSendiri.setOnClickListener(klik);
-        verifyStoragePermissions(this);
-        getRetrofitObject();
+        verifyLocationPermissions(this);
     }
 
     private View.OnClickListener klik = new View.OnClickListener() {
@@ -59,16 +56,26 @@ public class MainActivity extends BaseActivity {
         public void onClick(View v) {
             if(v.getId()==R.id.pilihSendiri)
             {
-                startActivity(new Intent(MainActivity.this, PilihSendiriActivity.class));
+                Intent intent = new Intent(MainActivity.this, PilihSendiriActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("lat", lat.toString());
+                bundle.putString("long", longt.toString());
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
             else if(v.getId()==R.id.tombolPilihkan)
             {
-                startActivity(new Intent(MainActivity.this, DipilihkanActivity.class));
+                Intent intent = new Intent(MainActivity.this, DipilihkanActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("lat", lat.toString());
+                bundle.putString("long", longt.toString());
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
         }
     };
 
-    public static void verifyStoragePermissions(Activity activity) {
+    private static void verifyLocationPermissions(Activity activity) {
         int permission;
         String[] PERMISSIONS_LOCATION = {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -159,73 +166,5 @@ public class MainActivity extends BaseActivity {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    private void getRetrofitObject() {
-        final Tempat[] places = new Tempat[1];
-        final Tempat[] places2 = new Tempat[1];
-        final List<Results> tampung = new ArrayList<>();
-        final List<Results> tampung2 = new ArrayList<>();
-
-        StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        urlbaru.append("location=" + lat + "," + longt);
-        urlbaru.append("&radius=" + 5000);
-        urlbaru.append("&types=" + "restaurant|cafe|bar|bakery");
-        urlbaru.append("&rankBy=" + "distance");
-        urlbaru.append("&key=" + "AIzaSyBVuRYeAWRZhzeF9c51pOUfAC93iP7FgBE");
-
-        StringBuilder urlbaru2 = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        urlbaru2.append("location=" + lat + "," + longt);
-        urlbaru2.append("&radius=" + 5000);
-        urlbaru2.append("&types=" + "mosque|church");
-        urlbaru2.append("&rankBy=" + "distance");
-        urlbaru2.append("&key=" + "AIzaSyBVuRYeAWRZhzeF9c51pOUfAC93iP7FgBE");
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://ridhoperdana.net")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GetPlace service = retrofit.create(GetPlace.class);
-
-        Call<Tempat> call = service.getPlaceResponseFood(urlbaru.toString());
-        Call<Tempat> call2 = service.getPlaceResponseWorship(urlbaru2.toString());
-
-        call.enqueue(new Callback<Tempat>() {
-
-            @Override
-            public void onResponse(Call<Tempat> call, Response<Tempat> response) {
-                places[0] = response.body();
-                for(int i = 0; i< places[0].getResults().size(); i++)
-                {
-                    tampung.add(places[0].getResults().get(i));
-                    Log.d("List Nama Restaurant->", tampung.get(i).getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Tempat> call, Throwable t) {
-                Log.d("onFailure", t.toString());
-            }
-
-
-        });
-
-        call2.enqueue(new Callback<Tempat>() {
-            @Override
-            public void onResponse(Call<Tempat> call, Response<Tempat> response) {
-                places2[0] = response.body();
-                for(int i = 0; i< places2[0].getResults().size(); i++)
-                {
-                    tampung2.add(places2[0].getResults().get(i));
-                    Log.d("List Tempat Ibadah->", tampung2.get(i).getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Tempat> call, Throwable t) {
-
-            }
-        });
     }
 }
