@@ -1,4 +1,6 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.interface_retrofit;
+
+import net.ridhoperdana.jalan.pojo_class.Tempat;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

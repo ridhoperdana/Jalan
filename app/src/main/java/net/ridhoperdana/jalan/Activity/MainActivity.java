@@ -1,4 +1,4 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,16 +17,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import net.ridhoperdana.jalan.drawer.BaseActivity;
+import net.ridhoperdana.jalan.R;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends BaseActivity {
     private LocationManager manager;

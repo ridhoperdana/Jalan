@@ -1,4 +1,4 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.recycler_view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Collection;
+import net.ridhoperdana.jalan.R;
+import net.ridhoperdana.jalan.pojo_class.Results;
+
 import java.util.Collections;
 import java.util.List;
 

@@ -1,8 +1,10 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.recycler_view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import net.ridhoperdana.jalan.R;
 
 /**
  * Created by RIDHO on 11/25/2016.

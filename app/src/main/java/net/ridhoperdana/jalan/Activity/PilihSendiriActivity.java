@@ -1,14 +1,18 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.activity;
 
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.IOException;
+import net.ridhoperdana.jalan.drawer.BaseActivity;
+import net.ridhoperdana.jalan.recycler_view.CustomAdapter;
+import net.ridhoperdana.jalan.interface_retrofit.GetPlace;
+import net.ridhoperdana.jalan.R;
+import net.ridhoperdana.jalan.pojo_class.Results;
+import net.ridhoperdana.jalan.pojo_class.Tempat;
+
 import java.util.ArrayList;
 import java.util.List;
 

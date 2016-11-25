@@ -1,7 +1,9 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import net.ridhoperdana.jalan.drawer.BaseActivity;
+import net.ridhoperdana.jalan.R;
 
 public class DipilihkanActivity extends BaseActivity {
 

@@ -1,4 +1,4 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.pojo_class;
 
 import com.google.gson.annotations.SerializedName;
 
