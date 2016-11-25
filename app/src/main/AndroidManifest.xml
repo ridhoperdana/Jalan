@@ -20,16 +20,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".drawer.BaseActivity" />
-        <activity android:name=".activity.PilihSendiriActivity"
-            android:label="Pilih Sendiri"/>
+        <activity
+            android:name=".activity.PilihSendiriActivity"
+            android:label="Pilih Sendiri" />
         <activity
             android:name=".activity.RiwayatActivity"
             android:label="Riwayat Perjalanan" />
         <activity
             android:name=".activity.PengaturanActivity"
             android:label="Pengaturan" />
-        <activity android:name=".activity.DipilihkanActivity"
-            android:label="Dipilihkan"/>
+        <activity
+            android:name=".activity.DipilihkanActivity"
+            android:label="Dipilihkan" />
+        <activity android:name=".activity.KonfirmasiActivity"></activity>
     </application>
 
 </manifest>

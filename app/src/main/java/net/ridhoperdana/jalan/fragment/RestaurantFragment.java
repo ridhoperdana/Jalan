@@ -60,7 +60,6 @@ public class RestaurantFragment extends android.support.v4.app.Fragment{
 //        final Tempat[] places2 = new Tempat[1];
         places = new Tempat();
         final List<Results> tampung = new ArrayList<>();
-        final List<Results> tampung2 = new ArrayList<>();
 //        List<Results> finalResult = new ArrayList<>();
 
         StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");

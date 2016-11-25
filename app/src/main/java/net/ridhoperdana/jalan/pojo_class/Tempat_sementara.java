@@ -7,22 +7,12 @@ package net.ridhoperdana.jalan.pojo_class;
 public class Tempat_sementara {
     private String nama_tempat, alamat_tempat;
     private Double lat_tempat, longt_tempat;
-    private int position_tempat;
 
-    public Tempat_sementara(String nama_tempat, String alamat_tempat, Double lat_tempat, Double longt_tempat, int position_tempat) {
+    public Tempat_sementara(String nama_tempat, String alamat_tempat, Double lat_tempat, Double longt_tempat) {
         this.nama_tempat = nama_tempat;
         this.alamat_tempat = alamat_tempat;
         this.lat_tempat = lat_tempat;
         this.longt_tempat = longt_tempat;
-        this.position_tempat = position_tempat;
-    }
-
-    public int getPosition_tempat() {
-        return position_tempat;
-    }
-
-    public void setPosition_tempat(int position_tempat) {
-        this.position_tempat = position_tempat;
     }
 
     public String getNama_tempat() {

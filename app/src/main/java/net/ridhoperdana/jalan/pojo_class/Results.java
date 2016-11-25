@@ -37,7 +37,16 @@ public class Results implements Serializable{
     @SerializedName("geometry")
     private Geometry geometry;
 
-//    @SerializedName("geometry")
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+    //    @SerializedName("geometry")
 //    private List<Geometry> geometry;
 
     public String getIcon() {

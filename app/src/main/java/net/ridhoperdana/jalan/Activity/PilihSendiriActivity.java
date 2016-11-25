@@ -1,118 +1,72 @@
 package net.ridhoperdana.jalan.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.Toast;
 
+import net.ridhoperdana.jalan.fragment.RestaurantFragment;
+import net.ridhoperdana.jalan.fragment.ShoppingFragment;
+import net.ridhoperdana.jalan.adapter_fragment.ViewPagerAdapter;
+import net.ridhoperdana.jalan.fragment.WisataFragment;
+import net.ridhoperdana.jalan.fragment.WorshipFragment;
 import net.ridhoperdana.jalan.drawer.BaseActivity;
-import net.ridhoperdana.jalan.recycler_view.CustomAdapter;
-import net.ridhoperdana.jalan.interface_retrofit.GetPlace;
 import net.ridhoperdana.jalan.R;
-import net.ridhoperdana.jalan.pojo_class.Results;
-import net.ridhoperdana.jalan.pojo_class.Tempat;
+import net.ridhoperdana.jalan.pojo_class.Tempat_sementara;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class PilihSendiriActivity extends BaseActivity {
-
-    RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
+    List<Tempat_sementara> list_tempat = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_sendiri);
-
+        ViewPager viewPager;
+        TabLayout tabLayout;
         Bundle bundle = getIntent().getBundleExtra("bundle");
         Double lat, longt;
         lat = Double.parseDouble(bundle.getString("lat"));
         longt = Double.parseDouble(bundle.getString("long"));
+
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(5);
+        setupViewPager(viewPager, lat, longt);
+        tabLayout = (TabLayout)findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
         Toast.makeText(this, "Lat: " + lat.toString() + "Long: " + longt.toString(), Toast.LENGTH_SHORT).show();
-        getRetrofitObject(lat,longt);
     }
 
-    private void getRetrofitObject(Double lat, Double longt) {
+    //untuk memasukkan fragment ke adapter
+    private void setupViewPager(ViewPager viewPager, Double lat, Double longt) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        RestaurantFragment fragobj = new RestaurantFragment();
+        adapter.addFragment(fragobj, "Makanan");
+        WorshipFragment fragobj2 = new WorshipFragment();
+        adapter.addFragment(fragobj2, "Tempat Ibadah");
+        WisataFragment fragobj3 = new WisataFragment();
+        adapter.addFragment(fragobj3, "Wisata");
+        ShoppingFragment fragobj4 = new ShoppingFragment();
+        adapter.addFragment(fragobj4, "Belanja");
+        viewPager.setAdapter(adapter);
+        Bundle bundle = new Bundle();
+        bundle.putString("lat", String.valueOf(lat));
+        bundle.putString("longt", String.valueOf(longt));
+        fragobj.setArguments(bundle);
+        fragobj2.setArguments(bundle);
+        fragobj3.setArguments(bundle);
+        fragobj4.setArguments(bundle);
+    }
 
-        final Tempat[] places = new Tempat[1];
-        final Tempat[] places2 = new Tempat[1];
-        final List<Results> tampung = new ArrayList<>();
-        final List<Results> tampung2 = new ArrayList<>();
-//        List<Results> finalResult = new ArrayList<>();
-
-        StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        urlbaru.append("location=" + lat + "," + longt);
-        urlbaru.append("&radius=" + 5000);
-        urlbaru.append("&types=" + "restaurant|cafe|bar|bakery");
-        urlbaru.append("&rankBy=" + "distance");
-        urlbaru.append("&key=" + "AIzaSyBVuRYeAWRZhzeF9c51pOUfAC93iP7FgBE");
-
-        StringBuilder urlbaru2 = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        urlbaru2.append("location=" + lat + "," + longt);
-        urlbaru2.append("&radius=" + 5000);
-        urlbaru2.append("&types=" + "mosque|church");
-        urlbaru2.append("&rankBy=" + "distance");
-        urlbaru2.append("&key=" + "AIzaSyBVuRYeAWRZhzeF9c51pOUfAC93iP7FgBE");
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://ridhoperdana.net")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GetPlace service = retrofit.create(GetPlace.class);
-
-        Call<Tempat> call = service.getPlaceResponseFood(urlbaru.toString());
-        Call<Tempat> call2 = service.getPlaceResponseWorship(urlbaru2.toString());
-
-        call.enqueue(new Callback<Tempat>() {
-
-            @Override
-            public void onResponse(Call<Tempat> call, Response<Tempat> response) {
-                places[0] = response.body();
-                for(int i = 0; i< places[0].getResults().size(); i++)
-                {
-                    tampung.add(places[0].getResults().get(i));
-                    Log.d("List Nama Restaurant->", tampung.get(i).getName());
-                }
-                recyclerView = (RecyclerView)findViewById(R.id.rv);
-                CustomAdapter adapter = new CustomAdapter(tampung, getApplication());
-                recyclerView.setAdapter(adapter);
-                linearLayoutManager = new LinearLayoutManager(PilihSendiriActivity.this);
-                recyclerView.setLayoutManager(linearLayoutManager);
-            }
-
-            @Override
-            public void onFailure(Call<Tempat> call, Throwable t) {
-                Log.d("onFailure", t.toString());
-            }
-        });
-
-        call2.enqueue(new Callback<Tempat>() {
-            @Override
-            public void onResponse(Call<Tempat> call, Response<Tempat> response) {
-                places2[0] = response.body();
-                for(int i = 0; i< places2[0].getResults().size(); i++)
-                {
-                    tampung2.add(places2[0].getResults().get(i));
-                    Log.d("List Tempat Ibadah->", tampung2.get(i).getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Tempat> call, Throwable t) {
-
-            }
-        });
-
-        Log.d("tampung: ", String.valueOf(tampung.size()));
-        Log.d("tampung2: ", String.valueOf(tampung2.size()));
+    public void saveToList(Tempat_sementara tempat)
+    {
+        list_tempat.add(tempat);
+        for(int i=0; i<list_tempat.size(); i++)
+        {
+            Log.d("tempat tambah: ", list_tempat.get(i).getNama_tempat());
+        }
     }
 }

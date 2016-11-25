@@ -36,20 +36,30 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(final CustomViewHolder holder, final int position) {
         final Results results = list.get(position);
 //        holder.textviewNamaTempat.setText(list.get(position).getName().toLowerCase());
 //        holder.textviewAlamatTempat.setText(list.get(position).getVicinity());
         holder.textviewNamaTempat.setText(results.getName().toLowerCase());
         holder.textviewAlamatTempat.setText(results.getVicinity());
         holder.checkBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setChecked(results.isSelected());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                tempat = new Tempat_sementara(list.get(position).getName(), list.get(position).getVicinity(), list.get(position).getGeometry().getLocation().getLat(), list.get(position).getGeometry().getLocation().getLng(), position);
-                if(context instanceof PilihSendiriActivity)
+//                tempat = new Tempat_sementara(results.getName(), results.getVicinity(), results.getGeometry().getLocation().getLat(), results.getGeometry().getLocation().getLng(), position);
+//                if(context instanceof PilihSendiriActivity)
+//                {
+//                    ((PilihSendiriActivity)context).saveToList(tempat);
+//                }
+                results.setSelected(true);
+                if(results.isSelected())
                 {
-                    ((PilihSendiriActivity)context).saveToList(tempat);
+                    tempat = new Tempat_sementara(results.getName(), results.getVicinity(), results.getGeometry().getLocation().getLat(), results.getGeometry().getLocation().getLng());
+                    if(context instanceof PilihSendiriActivity)
+                    {
+                        ((PilihSendiriActivity)context).saveToList(tempat);
+                    }
                 }
 //                list_tempat.add(tempat);
 //                for(int i=0; i<list_tempat.size(); i++)
@@ -73,5 +83,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder>{
     public CustomAdapter(List<Results> list, Context context) {
         this.list = list;
         this.context = context;
+    }
+
+    public void getObject()
+    {
+
     }
 }
