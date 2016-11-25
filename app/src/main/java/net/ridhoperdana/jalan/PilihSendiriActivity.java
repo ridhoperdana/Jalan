@@ -1,10 +1,14 @@
 package net.ridhoperdana.jalan;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +20,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PilihSendiriActivity extends BaseActivity {
 
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_sendiri);
+
         Bundle bundle = getIntent().getBundleExtra("bundle");
         Double lat, longt;
         lat = Double.parseDouble(bundle.getString("lat"));
@@ -29,6 +37,7 @@ public class PilihSendiriActivity extends BaseActivity {
     }
 
     private void getRetrofitObject(Double lat, Double longt) {
+
         final Tempat[] places = new Tempat[1];
         final Tempat[] places2 = new Tempat[1];
         final List<Results> tampung = new ArrayList<>();
@@ -69,6 +78,11 @@ public class PilihSendiriActivity extends BaseActivity {
                     tampung.add(places[0].getResults().get(i));
                     Log.d("List Nama Restaurant->", tampung.get(i).getName());
                 }
+                recyclerView = (RecyclerView)findViewById(R.id.rv);
+                CustomAdapter adapter = new CustomAdapter(tampung, getApplication());
+                recyclerView.setAdapter(adapter);
+                linearLayoutManager = new LinearLayoutManager(PilihSendiriActivity.this);
+                recyclerView.setLayoutManager(linearLayoutManager);
             }
 
             @Override
@@ -93,5 +107,8 @@ public class PilihSendiriActivity extends BaseActivity {
 
             }
         });
+
+        Log.d("tampung: ", String.valueOf(tampung.size()));
+        Log.d("tampung2: ", String.valueOf(tampung2.size()));
     }
 }
