@@ -26,7 +26,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder>{
     List<Results> list = Collections.emptyList();
     Context context;
     public Tempat_sementara tempat;
-    public List<Tempat_sementara> list_tempat = new ArrayList<>();
+    private int status=0;
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,30 +44,36 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder>{
         holder.textviewAlamatTempat.setText(results.getVicinity());
         holder.checkBox.setOnCheckedChangeListener(null);
         holder.checkBox.setChecked(results.isSelected());
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                tempat = new Tempat_sementara(results.getName(), results.getVicinity(), results.getGeometry().getLocation().getLat(), results.getGeometry().getLocation().getLng(), position);
-//                if(context instanceof PilihSendiriActivity)
-//                {
-//                    ((PilihSendiriActivity)context).saveToList(tempat);
-//                }
-                results.setSelected(true);
-                if(results.isSelected())
-                {
-                    tempat = new Tempat_sementara(results.getName(), results.getVicinity(), results.getGeometry().getLocation().getLat(), results.getGeometry().getLocation().getLng());
-                    if(context instanceof PilihSendiriActivity)
+        if(!results.isSelected())
+        {
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.d("status tekan 1: ", String.valueOf(results.isSelected()));
+                    results.setSelected(true);
+                    if(results.isSelected())
                     {
-                        ((PilihSendiriActivity)context).saveToList(tempat);
+                        tempat = new Tempat_sementara(results.getName(), results.getVicinity(), results.getGeometry().getLocation().getLat(), results.getGeometry().getLocation().getLng());
+                        if(context instanceof PilihSendiriActivity)
+                        {
+                            ((PilihSendiriActivity)context).saveToList(tempat);
+                        }
                     }
+                    Log.d("status tekan 2: ", String.valueOf(results.isSelected()));
                 }
-//                list_tempat.add(tempat);
-//                for(int i=0; i<list_tempat.size(); i++)
-//                {
-//                    Log.d("tempat tambah: ", list_tempat.get(i).getNama_tempat());
-//                }
-            }
-        });
+            });
+        }
+        if(results.isSelected())
+        {
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    results.setSelected(false);
+                    Log.d("status tekan: ", String.valueOf(results.isSelected()));
+                }
+            });
+        }
+
     }
 
     @Override
@@ -83,10 +89,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder>{
     public CustomAdapter(List<Results> list, Context context) {
         this.list = list;
         this.context = context;
-    }
-
-    public void getObject()
-    {
-
     }
 }

@@ -1,9 +1,12 @@
 package net.ridhoperdana.jalan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import net.ridhoperdana.jalan.fragment.RestaurantFragment;
@@ -19,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PilihSendiriActivity extends BaseActivity {
-    List<Tempat_sementara> list_tempat = new ArrayList<>();
+    ArrayList<Tempat_sementara> list_tempat = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_sendiri);
+        Button tombolSelesai = (Button)findViewById(R.id.tombolSelesaiPilih);
         ViewPager viewPager;
         TabLayout tabLayout;
         Bundle bundle = getIntent().getBundleExtra("bundle");
@@ -38,6 +42,15 @@ public class PilihSendiriActivity extends BaseActivity {
         tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         Toast.makeText(this, "Lat: " + lat.toString() + "Long: " + longt.toString(), Toast.LENGTH_SHORT).show();
+        tombolSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PilihSendiriActivity.this, KonfirmasiActivity.class);
+                Bundle bundle1 = new Bundle();
+                intent.putParcelableArrayListExtra("list", list_tempat);
+                startActivity(intent);
+            }
+        });
     }
 
     //untuk memasukkan fragment ke adapter
@@ -69,4 +82,6 @@ public class PilihSendiriActivity extends BaseActivity {
             Log.d("tempat tambah: ", list_tempat.get(i).getNama_tempat());
         }
     }
+
+
 }

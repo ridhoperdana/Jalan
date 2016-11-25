@@ -1,10 +1,15 @@
 package net.ridhoperdana.jalan.pojo_class;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by RIDHO on 11/25/2016.
  */
 
-public class Tempat_sementara {
+public class Tempat_sementara implements Parcelable{
     private String nama_tempat, alamat_tempat;
     private Double lat_tempat, longt_tempat;
 
@@ -14,6 +19,25 @@ public class Tempat_sementara {
         this.lat_tempat = lat_tempat;
         this.longt_tempat = longt_tempat;
     }
+
+    private Tempat_sementara(Parcel in) {
+        nama_tempat = in.readString();
+        alamat_tempat = in.readString();
+        lat_tempat = in.readDouble();
+        longt_tempat = in.readDouble();
+    }
+
+    public static final Creator<Tempat_sementara> CREATOR = new Creator<Tempat_sementara>() {
+        @Override
+        public Tempat_sementara createFromParcel(Parcel in) {
+            return new Tempat_sementara(in);
+        }
+
+        @Override
+        public Tempat_sementara[] newArray(int size) {
+            return new Tempat_sementara[size];
+        }
+    };
 
     public String getNama_tempat() {
         return nama_tempat;
@@ -45,5 +69,18 @@ public class Tempat_sementara {
 
     public void setLongt_tempat(Double longt_tempat) {
         this.longt_tempat = longt_tempat;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nama_tempat);
+        dest.writeString(alamat_tempat);
+        dest.writeDouble(lat_tempat);
+        dest.writeDouble(longt_tempat);
     }
 }

@@ -32,7 +32,8 @@
         <activity
             android:name=".activity.DipilihkanActivity"
             android:label="Dipilihkan" />
-        <activity android:name=".activity.KonfirmasiActivity"></activity>
+        <activity android:name=".activity.KonfirmasiActivity"
+            android:label="Konfirmasi Pilihan"/>
     </application>
 
 </manifest>
