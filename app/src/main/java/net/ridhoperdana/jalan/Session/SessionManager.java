@@ -23,18 +23,21 @@ public class SessionManager {
     private static final String IS_LOGIN = "isLoggedIn";
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_LAT = "lat";
+    private static final String KEY_LONGT = "longt";
 
     public SessionManager(Context context) {
         this.context = context;
         preferences = context.getSharedPreferences(PREF_NAME,PRIVATE_MODE);
         editor = preferences.edit();
-
     }
 
-    public void createLoginSession(String email, String nama){
+    public void createLoginSession(String email, String nama, String lat, String longt){
         editor.putBoolean(IS_LOGIN,true);
         editor.putString(KEY_EMAIL,email);
         editor.putString(KEY_NAME,nama);
+        editor.putString(KEY_LAT, lat);
+        editor.putString(KEY_LONGT, longt);
         editor.commit();
     }
 
@@ -56,6 +59,23 @@ public class SessionManager {
         HashMap<String ,String> user = new HashMap<>();
         user.put(KEY_NAME,preferences.getString(KEY_NAME,null));
         user.put(KEY_EMAIL,preferences.getString(KEY_EMAIL,null));
+    }
+
+    public Double getLatitude()
+    {
+        return Double.parseDouble(preferences.getString(KEY_LAT, null));
+    }
+
+    public Double getLongitude()
+    {
+        return Double.parseDouble(preferences.getString(KEY_LONGT, null));
+    }
+
+    public void setLatLongt(String lat, String longt)
+    {
+        editor.putString(KEY_LAT, lat);
+        editor.putString(KEY_LONGT, longt);
+        editor.commit();
     }
 
     public void logout(){

@@ -22,6 +22,5 @@ public class CustomViewHolderDipilihkan extends RecyclerView.ViewHolder{
         textviewNamaTempat = (TextView)itemView.findViewById(R.id.nama_tempat_dipilihkan);
         textviewAlamatTempat = (TextView)itemView.findViewById(R.id.alamat_tempat_dipilihkan);
         container = itemView.findViewById(R.id.container_recycler_view_dipilihkan);
-        tombolNavigasi = (Button) itemView.findViewById(R.id.tombol_navigasi);
     }
 }

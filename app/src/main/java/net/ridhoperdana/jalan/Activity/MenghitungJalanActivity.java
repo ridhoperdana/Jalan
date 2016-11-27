@@ -17,7 +17,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.ridhoperdana.jalan.R;
+import net.ridhoperdana.jalan.Session.SessionManager;
 import net.ridhoperdana.jalan.adapter_fragment.AdapterRuteTerpendek;
+import net.ridhoperdana.jalan.drawer.BaseActivity;
 import net.ridhoperdana.jalan.interface_retrofit.GetPlace;
 import net.ridhoperdana.jalan.pojo_class.Tempat;
 import net.ridhoperdana.jalan.pojo_class.Tempat_sementara;
@@ -32,7 +34,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MenghitungJalanActivity extends AppCompatActivity {
+public class MenghitungJalanActivity extends BaseActivity {
 
     Double[][] jarak;
     Double jarakTerdekat;
@@ -42,26 +44,27 @@ public class MenghitungJalanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menghitung_jalan);
         //Log.d("hasil",permutationFinder("abc").toString());
-        //ArrayList<Tempat_sementara> pilihan = getIntent().getParcelableArrayListExtra("pilihan");
+        ArrayList<Tempat_sementara> pilihan = getIntent().getParcelableArrayListExtra("pilihan");
 
 //        String lat = getIntent().getStringExtra("lat");
 //        String longt = getIntent().getStringExtra("longt");
 
-        ArrayList<Tempat_sementara> pilihan = new ArrayList<>();
-        pilihan.add(new Tempat_sementara("ITS","Sukolilo",-7.2768149,112.7900193));
-        pilihan.add(new Tempat_sementara("Galaxy Mall","Sukolilo",-7.2753914,112.7798674));
-        pilihan.add(new Tempat_sementara("TP","Sukolilo",-7.2629282,112.7381695));
-        pilihan.add(new Tempat_sementara("Hitech","Sukolilo",-7.252381,112.7481893));
-        pilihan.add(new Tempat_sementara("Unair","Sukolilo",-7.2716127,112.7557165));
+//        ArrayList<Tempat_sementara> pilihan = new ArrayList<>();
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+//        pilihan.add(new Tempat_sementara("ITS","Sukolilo",-7.2768149,112.7900193));
+//        pilihan.add(new Tempat_sementara("Galaxy Mall","Sukolilo",-7.2753914,112.7798674));
+//        pilihan.add(new Tempat_sementara("TP","Sukolilo",-7.2629282,112.7381695));
+//        pilihan.add(new Tempat_sementara("Hitech","Sukolilo",-7.252381,112.7481893));
+//        pilihan.add(new Tempat_sementara("Unair","Sukolilo",-7.2716127,112.7557165));
 
-        String lat = "-7.2899644";
-        String longt = "112.7768827";
+//        String lat = "-7.2899644";
+//        String longt = "112.7768827";
 
         jarak = new Double[pilihan.size()][pilihan.size()];
 
         Location start = new Location("posisiAwal");
-        start.setLatitude(Double.parseDouble(lat));
-        start.setLongitude(Double.parseDouble(longt));
+        start.setLatitude(sessionManager.getLatitude());
+        start.setLongitude(sessionManager.getLongitude());
 
         List<Integer> indexRuteTerpendek = getShortestPath(start,pilihan);
         ArrayList<Tempat_sementara> urutanTempat = new ArrayList<>();

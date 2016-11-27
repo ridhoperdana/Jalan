@@ -22,7 +22,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  */
 
 public class CustomAdapterDipilihkan extends RecyclerView.Adapter<CustomViewHolderDipilihkan> {
-    ArrayList<Results> list = new ArrayList<>();
+    ArrayList<Tempat_sementara> list = new ArrayList<>();
     Context context;
 
     @Override
@@ -34,20 +34,11 @@ public class CustomAdapterDipilihkan extends RecyclerView.Adapter<CustomViewHold
 
     @Override
     public void onBindViewHolder(CustomViewHolderDipilihkan holder, final int position) {
-        final Results results = list.get(position);
+        final Tempat_sementara results = list.get(position);
 //        holder.textviewNamaTempat.setText(list.get(position).getName().toLowerCase());
 //        holder.textviewAlamatTempat.setText(list.get(position).getVicinity());
-        holder.textviewNamaTempat.setText(results.getName().toLowerCase());
-        holder.textviewAlamatTempat.setText(results.getVicinity());
-        holder.tombolNavigasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr=" + results.getGeometry().getLocation().getLat().toString() + "," + results.getGeometry().getLocation().getLng().toString() + ""));
-                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
+        holder.textviewNamaTempat.setText(results.getNama_tempat().toLowerCase());
+        holder.textviewAlamatTempat.setText(results.getAlamat_tempat());
     }
 
     @Override
@@ -60,7 +51,7 @@ public class CustomAdapterDipilihkan extends RecyclerView.Adapter<CustomViewHold
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public CustomAdapterDipilihkan(ArrayList<Results> list, Context context) {
+    public CustomAdapterDipilihkan(ArrayList<Tempat_sementara> list, Context context) {
         this.list = list;
         this.context = context;
     }

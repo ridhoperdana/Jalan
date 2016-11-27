@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import net.ridhoperdana.jalan.Session.SessionManager;
 import net.ridhoperdana.jalan.drawer.BaseActivity;
 import net.ridhoperdana.jalan.R;
 
@@ -126,7 +127,8 @@ public class MainActivity extends BaseActivity {
 
             lat = mLastLocation.getLatitude();
             longt = mLastLocation.getLongitude();
-
+            SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.setLatLongt(lat+"", longt+"");
             Alamat = addresses.get(0).getAddressLine(0);
 //        String city = addresses.get(0).getLocality();
 //        String state = addresses.get(0).getAdminArea();

@@ -41,9 +41,9 @@ public class KonfirmasiActivity extends BaseActivity {
         tombolKonfirmasiBenar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(KonfirmasiActivity.this, KonfirmasiBenarActivity.class);
+                Intent intent = new Intent(KonfirmasiActivity.this, MenghitungJalanActivity.class);
                 Bundle bundle1 = new Bundle();
-                intent.putParcelableArrayListExtra("list", getObject);
+                intent.putParcelableArrayListExtra("pilihan", getObject);
                 startActivity(intent);
             }
         });

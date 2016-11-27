@@ -1,11 +1,13 @@
 package net.ridhoperdana.jalan.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import net.ridhoperdana.jalan.drawer.BaseActivity;
@@ -13,6 +15,7 @@ import net.ridhoperdana.jalan.R;
 import net.ridhoperdana.jalan.interface_retrofit.GetPlace;
 import net.ridhoperdana.jalan.pojo_class.Results;
 import net.ridhoperdana.jalan.pojo_class.Tempat;
+import net.ridhoperdana.jalan.pojo_class.Tempat_sementara;
 import net.ridhoperdana.jalan.recycler_view.CustomAdapter;
 import net.ridhoperdana.jalan.recycler_view.CustomAdapterDipilihkan;
 import net.ridhoperdana.jalan.recycler_view.CustomAdapterKonfirmasi;
@@ -34,10 +37,10 @@ public class DipilihkanActivity extends BaseActivity {
 
     public Tempat places;
 
-    List<Results> finalResultRestaurant = new ArrayList<>();
-    List<Results> finalResultShopping = new ArrayList<>();
-    List<Results> finalResultWisata = new ArrayList<>();
-    List<Results> finalResultWorship = new ArrayList<>();
+    List<Tempat_sementara> finalResultRestaurant = new ArrayList<>();
+    List<Tempat_sementara> finalResultShopping = new ArrayList<>();
+    List<Tempat_sementara> finalResultWisata = new ArrayList<>();
+    List<Tempat_sementara> finalResultWorship = new ArrayList<>();
     ArrayList<Results> tampung_final = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class DipilihkanActivity extends BaseActivity {
     private void getRetrofitObject(final Double lat, final Double longt) throws IOException {
 
         places = new Tempat();
-        final ArrayList<Results> tampung = new ArrayList<>();
+        final ArrayList<Tempat_sementara> tampung = new ArrayList<>();
         final List<Results> tampung2 = new ArrayList<>();
 
         AsyncTask<Void, Void, Integer> task = new AsyncTask<Void, Void, Integer>() {
@@ -88,7 +91,7 @@ public class DipilihkanActivity extends BaseActivity {
                 tampung.addAll(finalResultWorship);
                 for(int i=0; i<tampung.size(); i++)
                 {
-                    Log.d("nama lokasi final: ", tampung.get(i).getName());
+                    Log.d("nama lokasi final: ", tampung.get(i).getNama_tempat());
                 }
                 RecyclerView recyclerView;
                 LinearLayoutManager linearLayoutManager;
@@ -97,15 +100,26 @@ public class DipilihkanActivity extends BaseActivity {
                 recyclerView.setAdapter(adapter);
                 linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(linearLayoutManager);
+                Button button = (Button)findViewById(R.id.tombol_konfirmasi_benar);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(DipilihkanActivity.this, MenghitungJalanActivity.class);
+                        Bundle bundle1 = new Bundle();
+                        intent.putParcelableArrayListExtra("pilihan", tampung);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         task.execute();
     }
 
-    private ArrayList<Results> getRetrofitRestaurant(Double lat, Double longt) throws IOException {
+    private ArrayList<Tempat_sementara> getRetrofitRestaurant(Double lat, Double longt) throws IOException {
 
         places = new Tempat();
-        final ArrayList<Results> tampung = new ArrayList<>();
+        final ArrayList<Tempat_sementara> tampung = new ArrayList<>();
+        Tempat_sementara tempat_sementara;
 
         StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         urlbaru.append("location=" + lat + "," + longt);
@@ -125,14 +139,19 @@ public class DipilihkanActivity extends BaseActivity {
         places = call.execute().body();
         Random r = new Random();
         int random_number = r.nextInt(5 - 1 + 1) + 1;
-        tampung.add(places.getResults().get(random_number));
+        tempat_sementara = new Tempat_sementara(places.getResults().get(random_number).getName(),
+                places.getResults().get(random_number).getVicinity(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLat(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLng());
+        tampung.add(tempat_sementara);
         return tampung;
     }
 
-    private ArrayList<Results> getRetrofitShopping(Double lat, Double longt) throws IOException {
+    private ArrayList<Tempat_sementara> getRetrofitShopping(Double lat, Double longt) throws IOException {
 
         places = new Tempat();
-        final ArrayList<Results> tampung = new ArrayList<>();
+        final ArrayList<Tempat_sementara> tampung = new ArrayList<>();
+        Tempat_sementara tempat_sementara;
 
         StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         urlbaru.append("location=" + lat + "," + longt);
@@ -152,14 +171,19 @@ public class DipilihkanActivity extends BaseActivity {
         places = call.execute().body();
         Random r = new Random();
         int random_number = r.nextInt(5 - 1 + 1) + 1;
-        tampung.add(places.getResults().get(random_number));
+        tempat_sementara = new Tempat_sementara(places.getResults().get(random_number).getName(),
+                places.getResults().get(random_number).getVicinity(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLat(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLng());
+        tampung.add(tempat_sementara);
         return tampung;
     }
 
-    private ArrayList<Results> getRetrofitWisata(Double lat, Double longt) throws IOException {
+    private ArrayList<Tempat_sementara> getRetrofitWisata(Double lat, Double longt) throws IOException {
 
         places = new Tempat();
-        final ArrayList<Results> tampung = new ArrayList<>();
+        final ArrayList<Tempat_sementara> tampung = new ArrayList<>();
+        Tempat_sementara tempat_sementara;
 
         StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         urlbaru.append("location=" + lat + "," + longt);
@@ -179,14 +203,19 @@ public class DipilihkanActivity extends BaseActivity {
         places = call.execute().body();
         Random r = new Random();
         int random_number = r.nextInt(5 - 1 + 1) + 1;
-        tampung.add(places.getResults().get(random_number));
+        tempat_sementara = new Tempat_sementara(places.getResults().get(random_number).getName(),
+                places.getResults().get(random_number).getVicinity(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLat(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLng());
+        tampung.add(tempat_sementara);
         return tampung;
     }
 
-    private ArrayList<Results> getRetrofitObjectWorship(Double lat, Double longt) throws IOException {
+    private ArrayList<Tempat_sementara> getRetrofitObjectWorship(Double lat, Double longt) throws IOException {
 
         places = new Tempat();
-        final ArrayList<Results> tampung = new ArrayList<>();
+        final ArrayList<Tempat_sementara> tampung = new ArrayList<>();
+        Tempat_sementara tempat_sementara;
 
         StringBuilder urlbaru = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         urlbaru.append("location=" + lat + "," + longt);
@@ -206,11 +235,11 @@ public class DipilihkanActivity extends BaseActivity {
         Random r = new Random();
         int random_number = r.nextInt(5 - 1 + 1) + 1;
         places = call.execute().body();
-        tampung.add(places.getResults().get(random_number));
-//        for (int i=0; i<5; i++)
-//        {
-//            tampung.add(places.getResults().get(i));
-//        }
+        tempat_sementara = new Tempat_sementara(places.getResults().get(random_number).getName(),
+                places.getResults().get(random_number).getVicinity(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLat(),
+                places.getResults().get(random_number).getGeometry().getLocation().getLng());
+        tampung.add(tempat_sementara);
         return tampung;
     }
 }
