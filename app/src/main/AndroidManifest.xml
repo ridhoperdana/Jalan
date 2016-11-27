@@ -32,10 +32,15 @@
         <activity
             android:name=".activity.DipilihkanActivity"
             android:label="Dipilihkan" />
+
         <activity
             android:name=".activity.KonfirmasiActivity"
             android:label="Konfirmasi Pilihan" />
-        <activity android:name=".activity.KonfirmasiBenarActivity"></activity>
-    </application>
 
+        <activity android:name=".activity.MenghitungJalanActivity">
+
+        </activity>
+        <activity android:name=".activity.LogInActivity">
+        </activity>
+    </application>
 </manifest>
