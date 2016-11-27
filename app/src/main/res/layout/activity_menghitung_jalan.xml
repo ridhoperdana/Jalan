@@ -10,20 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="net.ridhoperdana.jalan.activity.MenghitungJalanActivity">
 
-    <!--<TextView-->
-        <!--android:id="@+id/judul"-->
-        <!--android:text="Rute Perjalanan Anda"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textSize="25sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
     <ListView
         android:id="@+id/listRuteTerdekat"
         android:layout_below="@+id/judul"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/selesai"/>
+
+    <Button
+        android:id="@+id/selesai"
+        android:onClick="perjalananSelesai"
+        android:layout_alignParentBottom="true"
+        android:text="Perjalanan Selesai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

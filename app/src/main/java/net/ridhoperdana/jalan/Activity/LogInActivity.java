@@ -43,7 +43,12 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         SessionManager sessionManager = new SessionManager(getApplicationContext());
-        sessionManager.checkLogin();
+        if(sessionManager.isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
 
         textUsername = (AppCompatEditText) findViewById(R.id.email);
         textPassword = (AppCompatEditText) findViewById(R.id.password);
@@ -93,10 +98,17 @@ public class LogInActivity extends AppCompatActivity {
                 sessionManager.setIsLogin();
 
                 Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    public void handleRegister(View view)
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void logIn(String email, String password){

@@ -1,6 +1,8 @@
 package net.ridhoperdana.jalan.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -117,7 +119,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // setup alert dialog builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                builder.setNegativeButton(android.R.string.ok, null);
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        SessionManager sessionManager = new SessionManager(getApplicationContext());
+                        sessionManager.setIsLogin();
+                        startActivity(intent);
+                    }
+                });
 
                 // check if there is an exception happen
                 if (e != null) {
@@ -133,8 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                 builder.setTitle("Register Succeeded");
                 builder.setMessage("Thank you for registering.");
                 dialog = builder.show();
-                SessionManager sessionManager = new SessionManager(getApplicationContext());
-                sessionManager.setIsLogin();
+
             }
         });
 

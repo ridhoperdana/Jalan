@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity {
     private Location mLastLocation;
     private Double lat, longt;
     private String Alamat, Alamat_saatini;
+    int backFlag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,4 +166,22 @@ public class MainActivity extends BaseActivity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+//    @Override
+//    protected void onResume() {
+//        backFlag = 0;
+//        super.onResume();
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        backFlag++;
+//        if (backFlag==1){
+//            Toast.makeText(this, "press back to exit", Toast.LENGTH_SHORT).show();
+//        }
+//        else if(backFlag==2){
+//            finish();
+//        }
+//
+//    }
 }

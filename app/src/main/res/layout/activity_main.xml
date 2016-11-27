@@ -29,7 +29,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Luffi"
         android:id="@+id/nama_pengguna"
         android:layout_below="@id/garis"
         android:textSize="25dp"

@@ -50,6 +50,7 @@ public class AdapterRuteTerpendek extends ArrayAdapter<Tempat_sementara> {
             holder.nama = (TextView)convertView.findViewById(R.id.nama_tempat);
             holder.alamat = (TextView)convertView.findViewById(R.id.alamat_tempat);
             holder.navigasi_btn = (Button)convertView.findViewById(R.id.tombolNavigasi);
+            holder.nomor = (TextView)convertView.findViewById(R.id.nomor);
             convertView.setTag(holder);
         }
         else {
@@ -57,6 +58,8 @@ public class AdapterRuteTerpendek extends ArrayAdapter<Tempat_sementara> {
         }
         holder.nama.setText(pilihanSekarang.getNama_tempat());
         holder.alamat.setText(pilihanSekarang.getAlamat_tempat());
+        int posisi = position+1;
+        holder.nomor.setText(posisi+"");
         holder.navigasi_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +74,8 @@ public class AdapterRuteTerpendek extends ArrayAdapter<Tempat_sementara> {
     }
 
     private class TempatHolder{
-        TextView nama, alamat;
+        TextView nama, alamat, nomor;
         Button navigasi_btn;
+
     }
 }

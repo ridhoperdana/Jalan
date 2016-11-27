@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
         <LinearLayout
-            android:layout_width="match_parent"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tombol"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp">
+            <TextView
+                android:id="@+id/nomor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_marginRight="16dp"
+                android:textSize="30sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/keterangan"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_centerVertical="true">
+            android:layout_gravity="center_vertical">
             <TextView
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Polsek Sukolilo"
                 android:id="@+id/nama_tempat"
-                android:text="nama tempat"
-                android:textSize="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
+                android:textSize="20sp"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Jalan Arief Rahman Hakim"
                 android:id="@+id/alamat_tempat"
-                android:text="alamat tempat"
-                android:textSize="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textSize="15sp" />
 
         </LinearLayout>
         <LinearLayout
+            android:layout_gravity="center_vertical"
             android:id="@+id/tombol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true">
+            android:gravity="end"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content">
             <Button
                 android:id="@+id/tombolNavigasi"
                 android:layout_width="wrap_content"
@@ -40,6 +60,6 @@
                 android:text="berangkat"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

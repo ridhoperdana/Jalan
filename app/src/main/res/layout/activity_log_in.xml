@@ -52,7 +52,7 @@
         <Button
             android:id="@+id/register"
             android:text="Register"
-            android:onClick="handleLogin"
+            android:onClick="handleRegister"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

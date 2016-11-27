@@ -9,6 +9,7 @@ import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -232,6 +233,12 @@ public class MenghitungJalanActivity extends BaseActivity {
         });
 
         return jarakDirection[0];
+    }
+
+    public void perjalananSelesai(View view){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }
