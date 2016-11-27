@@ -1,4 +1,4 @@
-package net.ridhoperdana.jalan;
+package net.ridhoperdana.jalan.drawer;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -11,7 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import static net.ridhoperdana.jalan.R.id.navigationView;
+import net.ridhoperdana.jalan.Session.SessionManager;
+import net.ridhoperdana.jalan.activity.MainActivity;
+import net.ridhoperdana.jalan.activity.PengaturanActivity;
+import net.ridhoperdana.jalan.activity.RiwayatActivity;
+import net.ridhoperdana.jalan.R;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -95,7 +99,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         {
             startActivity(new Intent(this, PengaturanActivity.class));
         }
+        if(id==R.id.tombolBeranda)
+        {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        if(id == R.id.logout){
+            SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.logout();
 
+        }
         return super.onOptionsItemSelected(item);
     }
 }

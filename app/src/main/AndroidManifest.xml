@@ -2,30 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.ridhoperdana.jalan">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".mesosfer.MesosferApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".drawer.BaseActivity" />
+        <activity
+            android:name=".activity.PilihSendiriActivity"
+            android:label="Pilih Sendiri" />
+        <activity
+            android:name=".activity.RiwayatActivity"
+            android:label="Riwayat Perjalanan" />
+        <activity
+            android:name=".activity.PengaturanActivity"
+            android:label="Pengaturan" />
+        <activity
+            android:name=".activity.DipilihkanActivity"
+            android:label="Dipilihkan" />
+        <activity
+            android:name=".activity.KonfirmasiActivity"
+            android:label="Konfirmasi Pilihan" />
+        <activity android:name=".activity.MenghitungJalanActivity"
+            android:label="Rute Perjalanan"/>
+        <activity android:name=".activity.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".PilihSendiriActivity"
-            android:label="Pilih Sendiri"/>
-        <activity
-            android:name=".RiwayatActivity"
-            android:label="Riwayat Perjalanan" />
-        <activity
-            android:name=".PengaturanActivity"
-            android:label="Pengaturan" />
-        <activity android:name=".DipilihkanActivity"
-            android:label="Dipilihkan"/>
+        <activity android:name=".activity.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
