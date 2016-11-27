@@ -18,5 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Tujuan Benar"
-        android:id="@+id/tombol_konfirmasi_benar"/>
+        android:id="@+id/tombol_konfirmasi_benar"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"/>
 </RelativeLayout>

@@ -12,11 +12,14 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_konfirmasi"/>
+        android:id="@+id/rv_konfirmasi"
+        android:layout_above="@+id/tombol_konfirmasi_benar"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Tujuan Benar"
-        android:id="@+id/tombol_konfirmasi_benar"/>
+        android:id="@+id/tombol_konfirmasi_benar"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"/>
 </RelativeLayout>

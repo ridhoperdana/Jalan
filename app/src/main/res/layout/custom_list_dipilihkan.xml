@@ -19,7 +19,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Polsek Sukolilo"
                 android:id="@+id/nama_tempat_dipilihkan"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true" />

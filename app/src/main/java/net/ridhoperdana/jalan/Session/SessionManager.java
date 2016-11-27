@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import net.ridhoperdana.jalan.activity.LogInActivity;
 import net.ridhoperdana.jalan.activity.MainActivity;
 
 import java.util.HashMap;
@@ -45,6 +46,11 @@ public class SessionManager {
         return preferences.getBoolean(IS_LOGIN,false);
     }
 
+    public void setIsLogin(){
+        editor.putBoolean(IS_LOGIN,true);
+        editor.commit();
+    }
+
     public void checkLogin(){
         if (this.isLoggedIn()){
             Intent intent = new Intent(context, MainActivity.class);
@@ -81,7 +87,10 @@ public class SessionManager {
     public void logout(){
         editor.clear();
         editor.commit();
-
+        Intent intent = new Intent(context, LogInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
         //go to halaman login
     }
 
