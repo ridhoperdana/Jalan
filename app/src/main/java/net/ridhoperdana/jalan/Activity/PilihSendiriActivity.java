@@ -41,14 +41,22 @@ public class PilihSendiriActivity extends BaseActivity {
         setupViewPager(viewPager, lat, longt);
         tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        Toast.makeText(this, "Lat: " + lat.toString() + "Long: " + longt.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Lat: " + lat.toString() + "Long: " + longt.toString(), Toast.LENGTH_SHORT).show();
         tombolSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PilihSendiriActivity.this, KonfirmasiActivity.class);
                 Bundle bundle1 = new Bundle();
                 intent.putParcelableArrayListExtra("list", list_tempat);
-                startActivity(intent);
+                if(list_tempat.size()==0)
+                {
+                    Toast.makeText(getApplicationContext(), "Tujuan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
@@ -82,6 +90,4 @@ public class PilihSendiriActivity extends BaseActivity {
             Log.d("tempat tambah: ", list_tempat.get(i).getNama_tempat());
         }
     }
-
-
 }

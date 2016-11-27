@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity {
 //        lokasi_saya = (TextView)findViewById(R.id.lokasi_sekarang);
 //        lokasi_saya.setText(Alamat);
             Alamat_saatini = Alamat;
-            Toast.makeText(this, "Lokasi sekarang: " + Alamat_saatini, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Lokasi sekarang: " + Alamat_saatini, Toast.LENGTH_SHORT).show();
             return 1;
         }catch (Exception e)
         {
