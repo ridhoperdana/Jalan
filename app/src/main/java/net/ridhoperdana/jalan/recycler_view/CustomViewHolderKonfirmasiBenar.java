@@ -11,13 +11,12 @@ import net.ridhoperdana.jalan.R;
  * Created by RIDHO on 11/27/2016.
  */
 
-public class CustomViewHolderDipilihkan extends RecyclerView.ViewHolder{
-
+public class CustomViewHolderKonfirmasiBenar extends RecyclerView.ViewHolder{
     TextView textviewNamaTempat, textviewAlamatTempat;
     View container;
     Button tombolNavigasi;
 
-    public CustomViewHolderDipilihkan(View itemView) {
+    public CustomViewHolderKonfirmasiBenar(View itemView) {
         super(itemView);
         textviewNamaTempat = (TextView)itemView.findViewById(R.id.nama_tempat_dipilihkan);
         textviewAlamatTempat = (TextView)itemView.findViewById(R.id.alamat_tempat_dipilihkan);

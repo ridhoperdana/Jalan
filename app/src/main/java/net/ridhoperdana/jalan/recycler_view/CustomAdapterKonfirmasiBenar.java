@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,29 +20,29 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  * Created by RIDHO on 11/27/2016.
  */
 
-public class CustomAdapterDipilihkan extends RecyclerView.Adapter<CustomViewHolderDipilihkan> {
-    ArrayList<Results> list = new ArrayList<>();
+public class CustomAdapterKonfirmasiBenar extends RecyclerView.Adapter<CustomViewHolderKonfirmasiBenar> {
+    ArrayList<Tempat_sementara> list = new ArrayList<>();
     Context context;
 
     @Override
-    public CustomViewHolderDipilihkan onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolderKonfirmasiBenar onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_dipilihkan, parent, false);
-        CustomViewHolderDipilihkan holder = new CustomViewHolderDipilihkan(v);
+        CustomViewHolderKonfirmasiBenar holder = new CustomViewHolderKonfirmasiBenar(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolderDipilihkan holder, final int position) {
-        final Results results = list.get(position);
+    public void onBindViewHolder(CustomViewHolderKonfirmasiBenar holder, final int position) {
+        final Tempat_sementara results = list.get(position);
 //        holder.textviewNamaTempat.setText(list.get(position).getName().toLowerCase());
 //        holder.textviewAlamatTempat.setText(list.get(position).getVicinity());
-        holder.textviewNamaTempat.setText(results.getName().toLowerCase());
-        holder.textviewAlamatTempat.setText(results.getVicinity());
+        holder.textviewNamaTempat.setText(results.getNama_tempat().toLowerCase());
+        holder.textviewAlamatTempat.setText(results.getAlamat_tempat());
         holder.tombolNavigasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr=" + results.getGeometry().getLocation().getLat().toString() + "," + results.getGeometry().getLocation().getLng().toString() + ""));
+                        Uri.parse("http://maps.google.com/maps?daddr=" + results.getLat_tempat().toString() + "," + results.getLongt_tempat().toString() + ""));
                 intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -60,7 +59,7 @@ public class CustomAdapterDipilihkan extends RecyclerView.Adapter<CustomViewHold
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public CustomAdapterDipilihkan(ArrayList<Results> list, Context context) {
+    public CustomAdapterKonfirmasiBenar(ArrayList<Tempat_sementara> list, Context context) {
         this.list = list;
         this.context = context;
     }
