@@ -2,7 +2,8 @@
 
 ---------
 Jelajah is an application which can help people to have a fun trip. 
-Most of people have some problem when they're on their trip, such as not knowing the best place to come, or the best route to visit each of the destination.
+Most of people have some problem when they're on their trip, 
+such as not knowing the best place to come, or the best route to visit each of the destination.
 
 
 ---------
