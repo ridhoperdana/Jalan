@@ -7,7 +7,7 @@ such as not knowing the best place to come, or the best route to visit each of t
 
 
 ---------
-Nama Lengkap: Ridho Perdana
-Alamat Lengkap: Jalan Keputih Tegal Timur Gang 2 No. 554 Keputih Surabaya 60111
-Nomor telepon: 087884555666
+Nama Lengkap: Ridho Perdana<br />
+Alamat Lengkap: Jalan Keputih Tegal Timur Gang 2 No. 554 Keputih Surabaya 60111<br />
+Nomor telepon: 087884555666<br />
 
