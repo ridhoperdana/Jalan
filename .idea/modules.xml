@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Jalan.iml" filepath="$PROJECT_DIR$/Jalan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mesosfer2.iml" filepath="$PROJECT_DIR$/mesosfer2.iml" />
     </modules>
   </component>
 </project>
