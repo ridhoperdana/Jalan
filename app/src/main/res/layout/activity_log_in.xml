@@ -4,39 +4,81 @@
     android:id="@+id/activity_log_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="net.ridhoperdana.jalan.activity.LogInActivity">
 
-    <TextView
-        android:id="@+id/judul"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:text="LOGIN"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/header"
+        android:padding="15dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:id="@+id/judul"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:text="Jelajah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/email"
-        android:layout_below="@+id/judul"
-        android:hint="email"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/password"
-        android:hint="password"
-        android:layout_below="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:padding="20dp"
+        android:id="@+id/login_area"
+        android:layout_marginTop="30dp">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/email"
+            android:hint="email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password"
+            android:hint="password"
+            android:layout_below="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </RelativeLayout>
 
-    <Button
-        android:layout_below="@+id/password"
-        android:id="@+id/login"
-        android:text="LOGIN"
-        android:onClick="handleLogin"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/register"
+            android:text="Register"
+            android:onClick="handleRegister"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login"
+            android:background="#F57C00"
+            />
+        <Button
+            android:id="@+id/login"
+            android:text="LOGIN"
+            android:onClick="handleLogin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#43A047" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:background="@drawable/icon_jh"
+        android:scaleType="fitCenter"
+        android:id="@+id/logo"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>

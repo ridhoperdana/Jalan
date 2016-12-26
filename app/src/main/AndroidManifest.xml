@@ -30,16 +30,16 @@
         <activity
             android:name=".activity.KonfirmasiActivity"
             android:label="Konfirmasi Pilihan" />
-        <activity android:name=".activity.MenghitungJalanActivity"></activity>
+        <activity android:name=".activity.MenghitungJalanActivity"
+            android:label="Rute Perjalanan"/>
         <activity android:name=".activity.LogInActivity">
-
-        </activity>
-        <activity android:name=".activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.RegisterActivity">
         </activity>
     </application>
 

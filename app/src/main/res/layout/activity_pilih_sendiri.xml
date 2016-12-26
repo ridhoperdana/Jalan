@@ -26,11 +26,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/appbarlayout"/>
+        android:layout_below="@id/appbarlayout"
+        android:layout_above="@+id/tombolSelesaiPilih"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Selesai"
-        android:id="@+id/tombolSelesaiPilih"/>
+        android:id="@+id/tombolSelesaiPilih"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"/>
 </RelativeLayout>

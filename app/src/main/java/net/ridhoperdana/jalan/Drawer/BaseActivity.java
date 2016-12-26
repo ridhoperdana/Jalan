@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import net.ridhoperdana.jalan.Session.SessionManager;
 import net.ridhoperdana.jalan.activity.MainActivity;
 import net.ridhoperdana.jalan.activity.PengaturanActivity;
 import net.ridhoperdana.jalan.activity.RiwayatActivity;
@@ -101,6 +102,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if(id==R.id.tombolBeranda)
         {
             startActivity(new Intent(this, MainActivity.class));
+        }
+        if(id == R.id.logout){
+            SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.logout();
+
         }
         return super.onOptionsItemSelected(item);
     }

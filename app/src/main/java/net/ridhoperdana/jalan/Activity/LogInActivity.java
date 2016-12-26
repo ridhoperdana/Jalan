@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.ridhoperdana.jalan.R;
+import net.ridhoperdana.jalan.Session.SessionManager;
 import net.ridhoperdana.jalan.interface_retrofit.GetPlace;
 
 import java.util.Locale;
@@ -41,6 +42,13 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        if(sessionManager.isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
 
         textUsername = (AppCompatEditText) findViewById(R.id.email);
         textPassword = (AppCompatEditText) findViewById(R.id.password);
@@ -86,11 +94,21 @@ public class LogInActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(LogInActivity.this, "User logged in...", Toast.LENGTH_SHORT).show();
+                SessionManager sessionManager = new SessionManager(getApplicationContext());
+                sessionManager.setIsLogin();
+
                 Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    public void handleRegister(View view)
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void logIn(String email, String password){

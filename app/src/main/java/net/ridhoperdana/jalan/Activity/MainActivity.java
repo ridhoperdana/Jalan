@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import net.ridhoperdana.jalan.Session.SessionManager;
 import net.ridhoperdana.jalan.drawer.BaseActivity;
 import net.ridhoperdana.jalan.R;
 
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity {
     private Location mLastLocation;
     private Double lat, longt;
     private String Alamat, Alamat_saatini;
+    int backFlag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +128,8 @@ public class MainActivity extends BaseActivity {
 
             lat = mLastLocation.getLatitude();
             longt = mLastLocation.getLongitude();
-
+            SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.setLatLongt(lat+"", longt+"");
             Alamat = addresses.get(0).getAddressLine(0);
 //        String city = addresses.get(0).getLocality();
 //        String state = addresses.get(0).getAdminArea();
@@ -163,4 +166,22 @@ public class MainActivity extends BaseActivity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+//    @Override
+//    protected void onResume() {
+//        backFlag = 0;
+//        super.onResume();
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        backFlag++;
+//        if (backFlag==1){
+//            Toast.makeText(this, "press back to exit", Toast.LENGTH_SHORT).show();
+//        }
+//        else if(backFlag==2){
+//            finish();
+//        }
+//
+//    }
 }
