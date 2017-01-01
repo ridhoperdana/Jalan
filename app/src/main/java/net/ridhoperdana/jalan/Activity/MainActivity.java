@@ -27,6 +27,7 @@ import java.util.Locale;
 
 public class MainActivity extends BaseActivity {
     private LocationManager manager;
+    private LocationListener listener;
     private Location mLastLocation;
     private Double lat, longt;
     private String Alamat, Alamat_saatini;
@@ -167,12 +168,12 @@ public class MainActivity extends BaseActivity {
         alert.show();
     }
 
-//    @Override
-//    protected void onResume() {
-//        backFlag = 0;
-//        super.onResume();
-//    }
-//
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getLocation();
+    }
+
 //    @Override
 //    public void onBackPressed() {
 //        backFlag++;
