@@ -35,6 +35,16 @@
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 
+    <Button
+        android:layout_below="@+id/nama_pengguna"
+        android:layout_width="wrap_content"
+        android:onClick="refreshLocation"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="cek lokasi"/>
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,6 +71,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
 
         <TextView
             android:layout_width="match_parent"

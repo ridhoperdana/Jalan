@@ -12,18 +12,32 @@
 
     <ListView
         android:id="@+id/listRuteTerdekat"
-        android:layout_below="@+id/judul"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/selesai"/>
+        android:layout_above="@+id/ll_button"/>
 
-    <Button
-        android:id="@+id/selesai"
-        android:onClick="perjalananSelesai"
-        android:layout_alignParentBottom="true"
-        android:text="Perjalanan Selesai"
+    <LinearLayout
+        android:id="@+id/ll_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/lihatMap"
+            android:onClick="gotoMap"
+            android:text="lihat map"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/selesai"
+            android:onClick="perjalananSelesai"
+            android:text="Perjalanan Selesai"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </RelativeLayout>

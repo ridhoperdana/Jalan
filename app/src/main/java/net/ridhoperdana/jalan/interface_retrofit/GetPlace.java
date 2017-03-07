@@ -32,4 +32,6 @@ public interface GetPlace {
     @FormUrlEncoded
     @POST
     Call<JsonElement> loggedIn(@Field("email") String email, @Field("password") String password, @Url String url);
+
+
 }

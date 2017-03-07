@@ -1,9 +1,16 @@
 package net.ridhoperdana.jalan.pojo_class;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.net.HttpURLConnection;
 
 /**
  * Created by RIDHO on 11/25/2016.
@@ -83,4 +90,15 @@ public class Tempat_sementara implements Parcelable{
         dest.writeDouble(lat_tempat);
         dest.writeDouble(longt_tempat);
     }
+
+    public JSONObject getJsonObject(){
+        JSONObject object = new JSONObject();
+        try{
+            object.put("location",lat_tempat+","+longt_tempat);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return object;
+    }
+
 }

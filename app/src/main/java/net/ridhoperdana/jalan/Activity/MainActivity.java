@@ -56,19 +56,31 @@ public class MainActivity extends BaseActivity {
             {
                 Intent intent = new Intent(MainActivity.this, PilihSendiriActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("lat", lat.toString());
-                bundle.putString("long", longt.toString());
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+                if(!lat.toString().equals("")&&!longt.toString().equals(""))
+                {
+                    bundle.putString("lat", lat.toString());
+                    bundle.putString("long", longt.toString());
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "lokasi belum bisa didapatkan", Toast.LENGTH_SHORT).show();
+                }
             }
             else if(v.getId()==R.id.tombolPilihkan)
             {
                 Intent intent = new Intent(MainActivity.this, DipilihkanActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("lat", lat.toString());
-                bundle.putString("long", longt.toString());
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+                if(!lat.toString().equals("")&&!longt.toString().equals(""))
+                {
+                    bundle.putString("lat", lat.toString());
+                    bundle.putString("long", longt.toString());
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "lokasi belum bisa didapatkan", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     };
@@ -165,6 +177,14 @@ public class MainActivity extends BaseActivity {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+    }
+    public void refreshLocation(View view){
+        getLocation();
+        try {
+            getAddress();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Override
